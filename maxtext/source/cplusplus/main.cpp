@@ -58,8 +58,10 @@ static void       printPageTo( const Page& page, const char*             outloca
 
 int main( int argc, char** argv )
 {
+	Environment::init( argc, argv );
+
 	Sequence<String>* file_locations = new Sequence<String>();
-	String* executable_directory = Environment::executableDirectory( argv[0] );
+	String* executable_directory = Environment::executableDirectory();
 	{
 		MTArguments args;
 
