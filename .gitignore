@@ -1,0 +1,9 @@
+.DS_Store
+._*
+bin
+obj
+lib
+Documentation
+documentation
+max2html
+xcuserdata
