@@ -1,0 +1,45 @@
+BODY {}
+DIV.document {}
+DIV.text { width:718px; margin-left:auto; margin-right:auto; }
+DIV.text { padding: 25; border: none; }
+
+P.title1 { font-size: large; text-align: center;  }
+P.title2 { font-size: medium; text-align: center; }
+
+H1 { font-family: helvetica; font-size: medium; }
+H2 { font-family: helvetica; font-size: small; }
+H3 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: small; font-style: italic }
+H4 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
+H5 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
+
+UL  { font-family: helvetica; font-size: small; margin-left: 10; text-align: justify; margin-right: 150; }
+OL  { font-family: helvetica; font-size: small; margin-left: 10; text-align: justify; margin-right: 150; }
+P  { font-family: helvetica; font-size: small; margin-left: 10; text-align: justify; }
+P.paragraph { font-family: helvetica; font-size: small; margin-left: 0; margin-right: 0; text-align: justify; }
+
+B  { color: black; }
+A  { text-decoration: none; }
+A:visited { text-decoration: none; }
+
+PRE { font-family: courier; font-size: 8pt; margin-left: 20 }
+
+BLOCKQUOTE
+{
+	width: 565;
+	color: #333;
+	font-family: times;
+	font-size: small;
+	line-height: 150%;
+	text-align: justify;
+}
+
+P.marginnote
+{
+	width: 100;
+	float: right;
+}
+
+TD { padding: 20; }
+
+TD.bibkey { padding: 0 }
+TD.reference {padding: 0 }
