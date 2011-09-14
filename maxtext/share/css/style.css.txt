@@ -1,13 +1,13 @@
 BODY {}
 DIV.document {}
-DIV.text { width:718px; margin-left:auto; margin-right:auto; }
+DIV.text { width:718px; width:550px; margin-left:auto; margin-right:auto; }
 DIV.text { padding: 25; border: none; }
 
 P.title1 { font-size: large; text-align: center;  }
 P.title2 { font-size: medium; text-align: center; }
 
-H1 { font-family: helvetica; font-size: medium; }
-H2 { font-family: helvetica; font-size: small; }
+H1 { font-family: helvetica; font-size: medium; padding-top:30px; }
+H2 { font-family: helvetica; font-size: small; padding-top:15px; }
 H3 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: small; font-style: italic }
 H4 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
 H5 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
@@ -25,7 +25,7 @@ PRE { font-family: courier; font-size: 8pt; margin-left: 20 }
 
 BLOCKQUOTE
 {
-	width: 565;
+	/* width: 565; */
 	color: #333;
 	font-family: times;
 	font-size: small;
