@@ -44,7 +44,7 @@ Title::print( PrintWriter& p ) const
 		p.printf( "<h1>%s</h1>\n", this->text->getChars() );
 		break;
 	default:
-		p.printf( "<p class='h%i'>%s</p>\n", this->level+1, this->text->getChars() );
+		p.printf( "<p class='subtitle'>%s</p>\n", this->text->getChars() );
 	}
 }
 
