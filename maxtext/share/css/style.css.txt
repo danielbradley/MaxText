@@ -3,14 +3,14 @@ DIV.document {}
 DIV.text { width:718px; width:550px; margin-left:auto; margin-right:auto; }
 DIV.text { padding: 25; border: none; }
 
-P.title1 { font-size: large; text-align: center;  }
-P.title2 { font-size: medium; text-align: center; }
+H1         { font-size: large;  text-align: center; }
+P.subtitle { font-size: medium; text-align: center; }
 
-H1 { font-family: helvetica; font-size: medium; padding-top:30px; }
-H2 { font-family: helvetica; font-size: small; padding-top:15px; }
-H3 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: small; font-style: italic }
-H4 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
+H2 { font-family: helvetica; font-size: medium; padding-top:30px; }
+H3 { font-family: helvetica; font-size: small; padding-top:15px; }
+H4 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: small; font-style: italic }
 H5 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
+H6 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
 
 UL  { font-family: helvetica; font-size: small; margin-left: 10; text-align: justify; margin-right: 150; }
 OL  { font-family: helvetica; font-size: small; margin-left: 10; text-align: justify; margin-right: 150; }
