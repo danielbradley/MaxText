@@ -49,19 +49,22 @@ Heading::~Heading()
 void
 Heading::print( PrintWriter& p ) const
 {
+	int _level = this->level + 1;
+
 	switch ( this->level )
 	{
 	case 1:
 	case 2:
 	case 3:
-		p.printf( "<h%i>%s</h%i>\n", this->level, this->text->getChars(), this->level );
-		break;
 	case 4:
 	case 5:
-	default:
-		p.printf( "<p class='l%i'>%s ", this->level, this->text->getChars() );
+	case 6:
+		p.printf( "<h%i>%s</h%i>\n", _level, this->text->getChars(), _level );
 		break;
-		p.printf( "<p class='l%i'>%s ", this->level, this->text->getChars() );
+	default:
+		p.printf( "<p class='h%i'>%s ", _level, this->text->getChars() );
+		break;
+		p.printf( "<p class='h%i'>%s ", _level, this->text->getChars() );
 		break;
 	}
 }

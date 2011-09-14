@@ -154,9 +154,10 @@ throw (IOException*)
 				else if ( line->startsWith( '~' ) )
 				{
 					const char* _line = line->getText().getChars();
-					delete line;
 					this->add( block );
-					block = new Preformatted();
+					block = new Preformatted( *line );
+					delete line;
+
 					bool loop = true;
 					while ( loop && !parser.hasFinished() )
 					{

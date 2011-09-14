@@ -7,11 +7,18 @@
 #include <openxds.base.h>
 
 namespace maxtext {
-
 class Preformatted : public Block
 {
+private:
+	enum type {
+		normal,
+		html,
+		latex
+	};
+	type blockType;
+
 public:
-	         Preformatted();
+	         Preformatted( const Line& line );
 	virtual ~Preformatted();
 
 	virtual void add( Line* aLine );

@@ -4,6 +4,7 @@
 #include <openxds.io/PrintWriter.h>
 #include <openxds.base/String.h>
 #include <openxds.base/StringBuffer.h>
+#include <openxds.base/StringTokenizer.h>
 
 #include <cstring>
 #include <cstdio>
@@ -15,8 +16,27 @@ using namespace openxds::io;
 
 static String* htmlEncode( const char* ch );
 
-Preformatted::Preformatted() : Block( Block::PREFORMATTED )
+Preformatted::Preformatted( const Line& line ) : Block( Block::PREFORMATTED )
 {
+	StringTokenizer st( line.getText() );
+	st.setDelimiter( '~' );
+	this->blockType = normal;
+	if ( st.hasMoreTokens() )
+	{
+		String* token = st.nextToken();
+		{
+			if ( token->contentEquals( "html" ) )
+			{
+				this->blockType = html;
+			}
+			else if ( token->contentEquals( "latex" ) )
+			{
+				this->blockType = latex;
+			}
+		}
+		delete token;
+	}
+
 	this->textbuffer = new StringBuffer();
 }
 
@@ -36,22 +56,39 @@ Preformatted::add( Line* aLine )
 void
 Preformatted::print( PrintWriter& p ) const
 {
-	String* html_encoded = htmlEncode( this->textbuffer->getChars() );
-	const char* _html_encoded = html_encoded->getChars();
+	switch ( this->blockType )
 	{
+	case html:
+		p.print( this->textbuffer->getChars() );
+		break;
+	case latex:
+		break;
+	default:
+		String* html_encoded = htmlEncode( this->textbuffer->getChars() );
 		p.printf( "<pre>\n" );
-		p.print( *html_encoded );
+		{
+			p.print( *html_encoded );
+		}
 		p.printf( "</pre>\n" );
+		delete html_encoded;
 	}
-	delete html_encoded;
 }
 
 void
 Preformatted::printTex( PrintWriter& p ) const
 {
-	p.printf( "\\begin{verbatimtab}\n" );
-	p.printf( "%s\n", this->textbuffer->getChars() );
-	p.printf( "\\end{verbatimtab}\n" );
+	switch ( this->blockType )
+	{
+	case html:
+		break;
+	case latex:
+		p.printf( "%s\n", this->textbuffer->getChars() );
+		break;
+	default:
+		p.printf( "\\begin{verbatimtab}\n" );
+		p.printf( "%s\n", this->textbuffer->getChars() );
+		p.printf( "\\end{verbatimtab}\n" );
+	}
 }
 
 static String* htmlEncode( const char* ch )
