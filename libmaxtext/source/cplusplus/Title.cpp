@@ -38,7 +38,14 @@ Title::~Title()
 void
 Title::print( PrintWriter& p ) const
 {
-	p.printf( "<p class='title%i'>%s</p>\n", this->level, this->text->getChars() );
+	switch ( this->level )
+	{
+	case 1:
+		p.printf( "<h1>%s</h1>\n", this->text->getChars() );
+		break;
+	default:
+		p.printf( "<p class='h%i'>%s</p>\n", this->level+1, this->text->getChars() );
+	}
 }
 
 void
