@@ -3,18 +3,21 @@ DIV.document {}
 DIV.text { width:718px; width:550px; margin-left:auto; margin-right:auto; }
 DIV.text { padding: 25; border: none; }
 
-H1         { font-size: large;  text-align: center; }
-P.subtitle { font-size: medium; text-align: center; }
+H1,H2,H3,H4,H5,H6,P,PRE,BLOCKQUOTE,UL,OL,SPAN,B,A { font-size:small; font-weight:normal; font-style:normal; font-family:helvetica; }
+H1,H2,H3,H4,H5,H6,P,PRE,BLOCKQUOTE,UL,OL,SPAN,B,A { padding:0; margin:0; margin-bottom:10px; }
 
-H2 { font-family: helvetica; font-size: medium; padding-top:30px; }
-H3 { font-family: helvetica; font-size: small; padding-top:15px; }
-H4 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: small; font-style: italic }
-H5 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
-H6 { padding-left: 0; font-family: helvetica; font-weight: normal; font-size: smaller; font-style: normal; font-variant: small-caps; }
+.subtitle { font-size: medium; text-align: center; }
 
-UL  { font-family: helvetica; font-size: small; margin-left: 10; text-align: justify; margin-right: 150; }
-OL  { font-family: helvetica; font-size: small; margin-left: 10; text-align: justify; margin-right: 150; }
-P  { font-family: helvetica; font-size: small; margin-left: 10; text-align: justify; }
+.H1 { font-size: large;   font-weight:bold; margin-top:10px; margin-bottom:30px; text-align: center; }
+.H2 { font-size: medium;  font-weight:bold; margin-top:10px; }
+.H3 { font-size: small;   font-weight:bold; margin-top:10px; }
+.H4 { font-size: small;   font-style: italic }
+.H5 { font-size: smaller; font-style: normal; font-variant: small-caps; }
+.H6 { font-size: smaller; font-style: normal; font-variant: small-caps; }
+
+UL  { margin-left: 10px; text-align: justify; margin-right: 150px; }
+OL  { margin-left: 10px; text-align: justify; margin-right: 150px; }
+P   { text-align: justify; }
 P.paragraph { font-family: helvetica; font-size: small; margin-left: 0; margin-right: 0; text-align: justify; }
 
 B  { color: black; }

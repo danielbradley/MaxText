@@ -59,7 +59,7 @@ Heading::print( PrintWriter& p ) const
 	case 4:
 	case 5:
 	case 6:
-		p.printf( "<h%i>%s</h%i>\n", _level, this->text->getChars(), _level );
+		p.printf( "<h%i class='h%i'>%s</h%i>\n", _level, _level, this->text->getChars(), _level );
 		break;
 	default:
 		p.printf( "<p class='h%i'>%s ", _level, this->text->getChars() );

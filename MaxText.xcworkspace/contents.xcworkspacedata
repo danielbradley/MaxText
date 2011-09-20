@@ -2,10 +2,34 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../../../../../../XCode/semi/semi.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../Autobiblio/0.x/autobiblio/autobiblio.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:maxtext/maxtext.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:libmaxtext/libmaxtext.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../OpenXDS/0.x/libopenxds_util/libopenxds_util.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../OpenXDS/0.x/libopenxds_io/libopenxds_io.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../OpenXDS/0.x/libopenxds_security/libopenxds_security.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../OpenXDS/0.x/libopenxds_adt_std/libopenxds_adt_std.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../OpenXDS/0.x/libopenxds_adt/libopenxds_adt.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../OpenXDS/0.x/libopenxds_base/libopenxds_base.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../../../OpenXDS_Core/0.x/libopenxds_core_base/libopenxds_core_base.xcodeproj">
@@ -21,23 +45,5 @@
    </FileRef>
    <FileRef
       location = "group:../../../OpenXDS_Core/0.x/libopenxds_core_io/libopenxds_core_io.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../OpenXDS/0.x/libopenxds_base/libopenxds_base.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../OpenXDS/0.x/libopenxds_adt/libopenxds_adt.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../OpenXDS/0.x/libopenxds_adt_std/libopenxds_adt_std.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../OpenXDS/0.x/libopenxds_security/libopenxds_security.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../OpenXDS/0.x/libopenxds_io/libopenxds_io.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../OpenXDS/0.x/libopenxds_util/libopenxds_util.xcodeproj">
    </FileRef>
 </Workspace>

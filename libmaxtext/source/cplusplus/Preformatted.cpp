@@ -23,18 +23,22 @@ Preformatted::Preformatted( const Line& line ) : Block( Block::PREFORMATTED )
 	this->blockType = normal;
 	if ( st.hasMoreTokens() )
 	{
-		String* token = st.nextToken();
+		delete st.nextToken();
+		if ( st.hasMoreTokens() )
 		{
-			if ( token->contentEquals( "html" ) )
+			String* token = st.nextToken();
 			{
-				this->blockType = html;
+				if ( token->contentEquals( "html" ) )
+				{
+					this->blockType = html;
+				}
+				else if ( token->contentEquals( "latex" ) )
+				{
+					this->blockType = latex;
+				}
 			}
-			else if ( token->contentEquals( "latex" ) )
-			{
-				this->blockType = latex;
-			}
+			delete token;
 		}
-		delete token;
 	}
 
 	this->textbuffer = new StringBuffer();
