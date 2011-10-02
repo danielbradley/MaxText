@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../../../../XCode/semi/semi.xcodeproj">
+      location = "group:../../../../../../XCode/quasi/quasi.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../../Autobiblio/0.x/autobiblio/autobiblio.xcodeproj">
