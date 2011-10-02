@@ -50,13 +50,13 @@ public:
 	const char* packages;
 };
 
-static bool    parseArguments(        int  argc,       char**            argv,               Sequence<String>& fileLocations, MTArguments& arguments );
+static bool    parseArguments(        int  argc, const char**            argv,               Sequence<String>& fileLocations, MTArguments& arguments );
 static bool   parseArgumentsX(        int  argc,       char**            argv,               Sequence<String>& fileLocations, String**     outfile, String** stylesheet, String** format, String** style );
 static void parseMaxTextFiles(       Page& page, const Sequence<String>& fileLocations );
 static void includeStylesheet(       Page& page, const char*             stylesheet,   const String& exe_dir );
 static void       printPageTo( const Page& page, const char*             outlocation,  const char* format );
 
-int main( int argc, char** argv )
+int main( int argc, const char** argv )
 {
 	Environment::init( argc, argv );
 
@@ -87,11 +87,11 @@ int main( int argc, char** argv )
 }
 
 
-bool parseArguments( int argc, char** argv, Sequence<String>& fileLocations, MTArguments& arguments )
+bool parseArguments( int argc, const char** argv, Sequence<String>& fileLocations, MTArguments& arguments )
 {
 	if ( argc <= 1 ) return false;
 	
-	String* executable = new String( (const char*) basename( argv[0] ) );
+	String* executable = new String( basename( (char*) argv[0] ) );
 	for ( int i=1; i < argc; i++ )
 	{
 		String arg( argv[i] );
