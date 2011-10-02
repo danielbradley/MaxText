@@ -8,27 +8,44 @@ H1,H2,H3,H4,H5,H6,P,PRE,BLOCKQUOTE,UL,OL,SPAN,B,A { padding:0; margin:0; margin-
 
 .subtitle { font-size: medium; text-align: center; }
 
-.H1 { font-size: large;   font-weight:bold; margin-top:10px; margin-bottom:30px; text-align: center; }
-.H2 { font-size: medium;  font-weight:bold; margin-top:10px; }
-.H3 { font-size: small;   font-weight:bold; margin-top:10px; }
-.H4 { font-size: small;   font-style: italic }
-.H5 { font-size: smaller; font-style: normal; font-variant: small-caps; }
-.H6 { font-size: smaller; font-style: normal; font-variant: small-caps; }
+.top { margin-top:10px; }
 
-UL  { margin-left: 10px; text-align: justify; margin-right: 150px; }
-OL  { margin-left: 10px; text-align: justify; margin-right: 150px; }
+.H1 { font-size: xx-large;   font-weight:bold; margin-top:10px; margin-bottom:10px; text-align: center; }
+.H2 { font-size: large;   font-weight:bold; margin-top:36px; }
+.H3 { font-size: medium;  font-weight:bold; margin-top:32px; }
+.H4 { font-size: small;   font-weight:bold; margin-top:26px; }
+.H5 { font-size: smaller; font-weight:bold; margin-top:26px;  font-style: normal; font-variant: small-caps; }
+.H6 { font-size: smaller; font-style:italic; }
+
+UL  { margin-left: 30px; text-align: justify; list-style-position:outside; }
+OL  { margin-left: 30px; text-align: justify; list-style-position:outside; }
+LI   { padding-left: 0px; }
 P   { text-align: justify; }
 P.paragraph { font-family: helvetica; font-size: small; margin-left: 0; margin-right: 0; text-align: justify; }
+P.part { font-size: x-large; font-weight: bold; margin-top:36; border-bottom: solid 1px black; padding-bottom:8px; }
 
 B  { color: black; }
 A  { text-decoration: none; }
 A:visited { text-decoration: none; }
 
-PRE { font-family: courier; font-size: 8pt; margin-left: 20 }
+P.figure
+{
+	margin: 20px 0 20px 0;
+	text-align:center;
+}
+
+PRE
+{
+	margin: 20px 0 20px 0;
+	padding: 10px 0px 10px 20px;
+	background: #eee;
+	font-family: courier;
+	font-size: 8pt;
+}
 
 BLOCKQUOTE
 {
-	/* width: 565; */
+	margin: 20px 0 20px 0;
 	color: #333;
 	font-family: times;
 	font-size: small;
