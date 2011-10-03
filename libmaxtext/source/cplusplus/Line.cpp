@@ -171,11 +171,17 @@ Line::print( PrintWriter& p ) const
 				}
 				break;
 			case '[':
-			case ']':
 				if ( !brackets && IsWhiteSpace( last ) && !IsWhiteSpace( next ) )
 				{
 					sb.append( "[" );
 					brackets = true;
+				}
+				break;
+			case ']':
+			case ',':
+				if ( !brackets )
+				{
+					sb.append( c );
 				}
 				else if ( brackets && !IsWhiteSpace( last ) )
 				{
@@ -183,7 +189,6 @@ Line::print( PrintWriter& p ) const
 					
 					String* bibkey_str = bibkey.asString();
 					{
-						sb.append( "<a" );
 						const char* key = bibkey_str->getChars();
 						try
 						{
@@ -192,6 +197,7 @@ Line::print( PrintWriter& p ) const
 							{
 								Reference& ref = entry->getValue();
 
+								sb.append( "<a" );
 								sb.append( " href='#" );
 								sb.append( *ref.key );
 								sb.append( "' title='" );
@@ -218,20 +224,21 @@ Line::print( PrintWriter& p ) const
 								} else {
 									sb.append( *bibkey_str );
 								}
+								sb.append( "</a>" );
 							}
 							delete entry;
 						}
 						catch ( openxds::Exception* ex )
 						{
-						sb.append( ">" );
 							delete ex;
+							sb.append( *bibkey_str );
 						}
-						
-						sb.append( "</a>" );
 					}
 					delete bibkey_str;
-					sb.append( "]" );
-					brackets = false;
+					bibkey.clear();
+					sb.append( c );
+
+					if ( ',' != c ) brackets = false;
 				}
 				else
 				{

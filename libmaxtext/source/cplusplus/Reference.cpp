@@ -89,13 +89,13 @@ Reference::print( PrintWriter& p ) const
 	}
 	
 	p.printf( "<tr>\n" );
-	p.printf( "<td class='bibkey'><a name='%s' />", this->key->getChars() );
+	p.printf( "<td class='bibkey'><a name='%s'>", this->key->getChars() );
 	p.printf( "[%i]", this->id );
 	//p.printf( "[%s]", this->key->getString().getChars() );
-	p.printf( "</td>\n" );
+	p.printf( "</a></td>\n" );
 
 	p.printf( "<td class='reference'>" );
-	p.printf( "<p class='Reference'>\n%s\n</p>\n", this->text->getChars() );
+	p.printf( "%s", this->text->getChars() );
 	p.printf( "</td>\n" );
 	
 	if ( number == this->id )
