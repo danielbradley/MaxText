@@ -1,13 +1,13 @@
 #ifndef MAXTEXT_LISTITEM_H
 #define MAXTEXT_LISTITEM_H
 
-#include "maxtext/Block.h"
+#include "maxtext/Line.h"
 #include <openxds.io.h>
 #include <openxds.base.h>
 
 namespace maxtext {
 
-class ListItem : public Block
+class ListItem : public Line
 {
 public:
 	         //ListItem();

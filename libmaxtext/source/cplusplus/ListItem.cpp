@@ -8,20 +8,24 @@ using namespace maxtext;
 using namespace openxds::base;
 using namespace openxds::io;
 
-ListItem::ListItem( String* aString ) : Block( Block::LISTITEM )
+ListItem::ListItem( String* aString ) : Line( aString, Block::LISTITEM )
 {
-	this->text = aString;
+//	this->text = aString.asSt;
 }
 
 ListItem::~ListItem()
 {
-	delete this->text;
+//	delete this->text;
 }
 
 void
 ListItem::print( PrintWriter& p ) const
 {
-	p.printf( "<li>\n%s\n</li>\n", this->getText().getChars() );
+	p.printf( "<li>" );
+	Line::print( p );
+	p.printf( "</li>" );
+	
+	//p.printf( "<li>\n%s\n</li>\n", this->getText().getChars() );
 }
 
 void
@@ -33,5 +37,5 @@ ListItem::printTex( PrintWriter& p ) const
 const String&
 ListItem::getText() const
 {
-	return *this->text;
+	return Line::getText();// *this->text;
 }

@@ -34,6 +34,11 @@ Line::Line( String* aString ) : Block( Block::LINE )
 	this->line = aString;
 }
 
+Line::Line( String* aString, int aType ) : Block( aType )
+{
+	this->line = aString;
+}
+
 Line::~Line()
 {
 	delete this->line;

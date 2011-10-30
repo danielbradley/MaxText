@@ -18,6 +18,7 @@ public:
 
 	         Line();
 	         Line( openxds::base::String* aString );
+			 Line( openxds::base::String* aString, int aType );
 	virtual ~Line();
 
 	virtual void print( openxds::io::PrintWriter& p ) const;
