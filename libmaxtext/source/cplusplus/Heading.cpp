@@ -1,6 +1,7 @@
 #include "maxtext/Heading.h"
 #include "maxtext/Line.h"
 
+#include <openxds.base/Math.h>
 #include <openxds.base/String.h>
 #include <openxds.io/PrintWriter.h>
 
@@ -10,6 +11,8 @@ using namespace openxds::io;
 
 #include <cstdio>
 #include <cstdlib>
+
+int Heading::min = 1000;
 
 Heading::Heading( const Line& line, const String& documentType ) : Block( Block::HEADING )
 {
@@ -39,6 +42,8 @@ Heading::Heading( const Line& line, const String& documentType ) : Block( Block:
 		this->text = line_text.substring( this->level, end );
 		//abort();
 	}
+	
+	Heading::min = (int) Math::min( this->level, Heading::min );
 }
 
 Heading::~Heading()
@@ -49,6 +54,9 @@ Heading::~Heading()
 void
 Heading::print( PrintWriter& p ) const
 {
+	int reduce_class_by = Heading::min - 1;
+
+	int _class = this->level + 1 - reduce_class_by;
 	int _level = this->level + 1;
 
 	switch ( this->level )
@@ -59,12 +67,12 @@ Heading::print( PrintWriter& p ) const
 	case 4:
 	case 5:
 	case 6:
-		p.printf( "<h%i class='h%i'>%s</h%i>\n", _level, _level, this->text->getChars(), _level );
+		p.printf( "<h%i class='h%i'>%s</h%i>\n", _level, _class, this->text->getChars(), _level );
 		break;
 	default:
-		p.printf( "<p class='h%i'>%s ", _level, this->text->getChars() );
+		p.printf( "<p class='h%i'>%s ", _class, this->text->getChars() );
 		break;
-		p.printf( "<p class='h%i'>%s ", _level, this->text->getChars() );
+		p.printf( "<p class='h%i'>%s ", _class, this->text->getChars() );
 		break;
 	}
 }

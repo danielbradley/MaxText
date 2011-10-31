@@ -20,6 +20,8 @@ public:
 	openxds::base::String* documentType;
 	int                    level;
 	bool                   silent;
+	
+	static int min;
 };
 
 };
