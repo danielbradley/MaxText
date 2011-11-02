@@ -13,7 +13,7 @@ namespace maxtext {
 class Page
 {
 public:
-	         Page( const openxds::base::String& classType, const openxds::base::String& parameters, const openxds::base::String& packages );
+	         Page( const openxds::base::String& classType, const openxds::base::String& parameters, const openxds::base::String& packages, bool contentOnly );
 	virtual ~Page();	
 
 	void parse( openxds::io::InputStream& in )
@@ -40,6 +40,7 @@ private:
 	openxds::adt::ISequence<Block>* blocks;
 
 	bool newlineMarksParagraph;
+	bool contentOnly;
 };
 
 };

@@ -34,7 +34,7 @@ using namespace openxds::base;
 using namespace openxds::io;
 using namespace openxds::io::exceptions;
 
-Page::Page( const String& classType, const String& parameters, const String& packages )
+Page::Page( const String& classType, const String& parameters, const String& packages, bool contentOnly )
 {
 	this->classType  = new String( classType );
 	this->parameters = new String( parameters );
@@ -43,6 +43,7 @@ Page::Page( const String& classType, const String& parameters, const String& pac
 	this->blocks     = new openxds::adt::std::Sequence<Block>();
 
 	this->newlineMarksParagraph = false;
+	this->contentOnly = contentOnly;
 }
 
 Page::~Page()
@@ -293,16 +294,19 @@ Page::print( void* stream ) const
 void
 Page::print( PrintWriter& p ) const
 {
-	p.printf( "<html>\n" );
-	p.printf( "<head>\n" );
-	if ( this->stylesheet->getLength() )
+	if ( ! this->contentOnly )
 	{
-		p.printf( "<style type='text/css'>\n" );
-		p.println( this->stylesheet->getChars() );
-		p.printf( "</style>\n" );
+		p.printf( "<html>\n" );
+		p.printf( "<head>\n" );
+		if ( this->stylesheet->getLength() )
+		{
+			p.printf( "<style type='text/css'>\n" );
+			p.println( this->stylesheet->getChars() );
+			p.printf( "</style>\n" );
+		}
+		p.printf( "</head>\n" );
+		p.printf( "<body>\n" );
 	}
-	p.printf( "</head>\n" );
-	p.printf( "<body>\n" );
 	p.printf( "<div class='document'>\n" );
 	p.printf( "<div class='text'>\n" );
 	
@@ -318,8 +322,12 @@ Page::print( PrintWriter& p ) const
 	delete it;
 	p.printf( "</div>\n" );
 	p.printf( "</div>\n" );
-	p.printf( "</body>\n" );
-	p.printf( "</html>\n" );
+
+	if ( ! this->contentOnly )
+	{
+		p.printf( "</body>\n" );
+		p.printf( "</html>\n" );
+	}
 }
 
 void

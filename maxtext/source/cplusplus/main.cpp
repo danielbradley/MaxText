@@ -36,6 +36,7 @@ public:
 		this->classType   = "";
 		this->parameters  = "";
 		this->packages    = "";
+		this->contentOnly = "";
 	}
 	
 	~MTArguments()
@@ -48,6 +49,7 @@ public:
 	const char* classType;
 	const char* parameters;
 	const char* packages;
+	const char* contentOnly;
 };
 
 static bool    parseArguments(        int  argc, const char**            argv,               Sequence<String>& fileLocations, MTArguments& arguments );
@@ -64,12 +66,14 @@ int main( int argc, const char** argv )
 	String* executable_directory = Environment::executableDirectory();
 	{
 		MTArguments args;
-
+		
 		if ( parseArguments( argc, argv, *file_locations, args ) )
 		{
+			String contentOnly( args.contentOnly );
+
 			if ( file_locations->size() > 0 )
 			{
-				Page page( args.classType, args.parameters, args.packages );
+				Page page( args.classType, args.parameters, args.packages, contentOnly.contentEquals( "--content-only" ) );
 				parseMaxTextFiles( page, *file_locations );
 				includeStylesheet( page, args.stylesheet, *executable_directory );
 				printPageTo( page, args.outfile, args.format );
@@ -147,6 +151,13 @@ bool parseArguments( int argc, const char** argv, Sequence<String>& fileLocation
 			if ( i < argc )
 			{
 				arguments.packages = argv[i];
+			}
+		}
+		else if ( arg.equals( "--content-only" ) )
+		{
+			if ( i < argc )
+			{
+				arguments.contentOnly = argv[i];
 			}
 		}
 		else
