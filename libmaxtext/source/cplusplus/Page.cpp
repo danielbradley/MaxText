@@ -334,7 +334,7 @@ void
 Page::printTex( PrintWriter& p ) const
 {
 	p.printf( "\\documentclass[%s]{%s}\n", this->parameters->getChars(), this->classType->getChars() );
-	p.printf( "\\usepackage{fullpage}\n" );
+	//p.printf( "\\usepackage{fullpage}\n" );
 	p.printf( "\\usepackage{moreverb}\n" );
 	p.printf( "\\usepackage{verbatim}\n" );
 	p.printf( "\\usepackage{graphicx}\n" );
