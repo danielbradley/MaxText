@@ -41,10 +41,10 @@ Title::print( PrintWriter& p ) const
 	switch ( this->level )
 	{
 	case 1:
-		p.printf( "<h1 class='h1'>%s</h1>\n", this->text->getChars() );
+		p.printf( "<header id='title'>%s</header>\n", this->text->getChars() );
 		break;
 	default:
-		p.printf( "<p class='subtitle'>%s</p>\n", this->text->getChars() );
+		p.printf( "<header id='subtitle'>%s</header>\n", this->text->getChars() );
 	}
 }
 
