@@ -12,9 +12,10 @@
 
 using namespace maxtext;
 using namespace openxds::adt;
-using namespace openxds::adt::std;
 using namespace openxds::base;
 using namespace openxds::io;
+
+using openxds::adt::std::Sequence;
 
 List::List() : Block( Block::LIST )
 {
