@@ -17,7 +17,8 @@ int Heading::min = 1000;
 Heading::Heading( const Line& line, const String& documentType ) : Block( Block::HEADING )
 {
 	const String& line_text = line.getText();
-	long end = line_text.getLength() - 1;
+	long          end       = line_text.getLength() - 1;
+	String*       tmp       = null;
 
 	this->documentType = new String( documentType );
 	this->level = line.startsWithDots();
@@ -35,13 +36,9 @@ Heading::Heading( const Line& line, const String& documentType ) : Block( Block:
 	// |...T0|
 	// |0123456|
 
-	if ( this->level <= end )
-	{
-		this->text = line_text.substring( this->level, end );
-	} else {
-		this->text = line_text.substring( this->level, end );
-		//abort();
-	}
+	tmp        = line_text.substring( this->level, end );
+	this->text = tmp->trim();
+	delete tmp;
 	
 	Heading::min = (int) Math::min( this->level, Heading::min );
 }
@@ -50,6 +47,33 @@ Heading::~Heading()
 {
 	delete this->text;
 }
+
+void
+Heading::print( PrintWriter& p ) const
+{
+	int _level = this->level;
+
+	switch ( this->level )
+	{
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+	case 6:
+		p.printf( "<h%i>%s</h%i>\n", _level, this->text->getChars(), _level );
+		break;
+	default:
+		p.printf( "<p>%s</p>\n", this->text->getChars() );
+		break;
+		p.printf( "<p>%s</p>\n", this->text->getChars() );
+		break;
+	}
+}
+
+/*
+
+Previous implementation that incremented headings.
 
 void
 Heading::print( PrintWriter& p ) const
@@ -76,6 +100,7 @@ Heading::print( PrintWriter& p ) const
 		break;
 	}
 }
+*/
 
 void
 Heading::printTex( PrintWriter& p ) const
