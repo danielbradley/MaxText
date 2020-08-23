@@ -298,6 +298,7 @@ Page::print( PrintWriter& p ) const
 	{
 		p.printf( "<html>\n" );
 		p.printf( "<head>\n" );
+		p.printf( "<meta name='viewport' content='width=device-width'>\n" );
 		if ( this->stylesheet->getLength() )
 		{
 			p.printf( "<style type='text/css'>\n" );
@@ -305,10 +306,9 @@ Page::print( PrintWriter& p ) const
 			p.printf( "</style>\n" );
 		}
 		p.printf( "</head>\n" );
-		p.printf( "<body>\n" );
+		p.printf( "<body class='maxtext'>\n" );
 	}
-	p.printf( "<div class='document'>\n" );
-	p.printf( "<div class='text'>\n" );
+	//p.printf( "<div class='maxtext'>\n" );
 	
 	IPIterator<Block>* it = this->blocks->positions();
 	while ( it->hasNext() )
@@ -320,8 +320,7 @@ Page::print( PrintWriter& p ) const
 		delete pos;
 	}
 	delete it;
-	p.printf( "</div>\n" );
-	p.printf( "</div>\n" );
+	//p.printf( "</div>\n" );
 
 	if ( ! this->contentOnly )
 	{
@@ -341,6 +340,7 @@ Page::printTex( PrintWriter& p ) const
 	p.printf( "\\usepackage{epstopdf}\n" );
 	p.printf( "\\usepackage{float}\n" );
 	p.printf( "\\usepackage{textcomp}\n" );
+	//p.printf( "\\usepackage[utf8]{inputenc}\n" );
 
 	openxds::base::StringTokenizer st( *this->packages );
 	st.setDelimiter( ',' );
@@ -350,6 +350,8 @@ Page::printTex( PrintWriter& p ) const
 		p.printf( "\\usepackage{%s}\n", token->getChars() );
 		delete token;
 	}
+	p.printf( "\\makeindex\n" );
+	p.printf( "\\makeglossaries\n" );
 
 	p.printf( "\\begin{document}\n" );
 	
