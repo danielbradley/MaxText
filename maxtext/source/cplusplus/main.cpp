@@ -4,6 +4,7 @@
 #include <openxds.io/FileInputStream.h>
 #include <openxds.io/FileOutputStream.h>
 #include <openxds.io/IO.h>
+#include <openxds.io/HTMLWriter.h>
 #include <openxds.io/Path.h>
 #include <openxds.io/PrintWriter.h>
 #include <openxds.adt.std/Sequence.h>
@@ -81,7 +82,7 @@ int main( int argc, const char** argv )
 		}
 		else
 		{
-			fprintf( stdout, "Usage: max2html\n\t [--format \"html\" | \"tex\"]\n\t [--class \"article\" | \"report\"]\n\t [--parameters twocolumn,A4]\n\t [--packages moreverb,graphicx,epstopdf]\n\t [--out OUTPUT_FILE] <Max Text File> ..." );
+			fprintf( stdout, "Usage: max2html\n\t [--content-only]\n\t [--format \"html\" | \"tex\"]\n\t [--class \"article\" | \"report\"]\n\t [--parameters twocolumn,A4]\n\t [--packages moreverb,graphicx,epstopdf]\n\t [--out OUTPUT_FILE] <Max Text File> ..." );
 		}
 	}
 	delete executable_directory;
@@ -280,10 +281,10 @@ bool parseArgumentsX( int argc, char** argv, Sequence<String>& fileLocations, St
 
 void parseMaxTextFiles( Page& page, const Sequence<String>& fileLocations )
 {
-	IPIterator<String>* it = fileLocations.positions();
+	const IPIterator<String>* it = fileLocations.positions();
 	while ( it->hasNext() )
 	{
-		IPosition<String>* p = it->next();
+		const IPosition<String>* p = it->next();
 		{
 			const String& location = p->getElement();
 			const char* _location = location.getChars();
@@ -311,7 +312,7 @@ void includeStylesheet( Page& page, const char* stylesheet, const String& exe_di
 			page.parseStyleSheet( cssin );
 		}
 	} else {
-		FormattedString default_css_location( "%s/../share/css/style.css.txt", exe_dir.getChars() );
+		FormattedString default_css_location( "%s/../share/css/maxtext.css", exe_dir.getChars() );
 		File                         cssfile( default_css_location );
 
 		if ( cssfile.exists() )
@@ -326,7 +327,7 @@ void includeStylesheet( Page& page, const char* stylesheet, const String& exe_di
 		{
 			//	style sheet may be in OpenStep style resources dir.
 		
-			FormattedString default_css_location( "%s/../../resources/css/style.css.txt", exe_dir.getChars() );
+			FormattedString default_css_location( "%s/../../resources/css/maxtext.css", exe_dir.getChars() );
 			File                         cssfile( default_css_location );
 		
 			if ( cssfile.exists() )
@@ -343,14 +344,15 @@ void printPageTo( const Page& page, const char* outlocation, const char* format 
 {
 	if ( 0 != CharString_compare( outlocation, "" ) )
 	{
-		File             outfile( outlocation );
+		File             outfile( outlocation ); outfile.open( "w" );
 		FileOutputStream      os( outfile );
-		PrintWriter           out( os );
 
 		if ( 0 == CharString_compare( format, "tex" ) )
 		{
+			PrintWriter out( os );
 			page.printTex( out );
 		} else {
+			HTMLWriter  out( os );
 			page.print( out );
 		}
 	} else {
@@ -358,7 +360,8 @@ void printPageTo( const Page& page, const char* outlocation, const char* format 
 		{
 			page.printTex( IO::out() );
 		} else {
-			page.print( IO::out() );
+			HTMLWriter  out( IO::out().getOutputStream() );
+			page.print( out );
 		}
 	}
 }
