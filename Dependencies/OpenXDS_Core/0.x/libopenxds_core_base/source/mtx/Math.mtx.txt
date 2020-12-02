@@ -1,0 +1,508 @@
+!
+~html~
+Back to:
+<h2 class='inline'><a href='..'>Documentation</a></h2> &gt;
+<h3 class='inline'><a href='..'>OpenXDS Core</a></h3> &gt;
+<h4 class='inline'><a href='..'>Base</a></h4> &gt;
+<span>Math</span>
+<hr>
+~
+!
+
+.	Math
+
+!
+~!include/openxds.core.base/Math.h~
+#ifndef OPENXDS_CORE_BASE_MATH_H
+#define OPENXDS_CORE_BASE_MATH_H
+
+#include "openxds.core.h"
+~
+!
+
+The /Math/ component provides a wrapper around several math functions normally defined in the standard C library.
+This component was implemented primarily due to undiagosed incompatiblities when trying to access C++ math libraries from within OpenXDS.
+
+..		Usage
+
+Linkage:
+
+~
+-lopenxds_core_base
+~
+
+To use the Math component:
+
+~
+#include <openxds.core.base/Math.h>
+~
+
+..		Function Summary
+
+!
+~include/openxds.core.base/Math.h~
+EXPORT	long        Math_constrainBetween( long aNumber, long lower, long upper );
+EXPORT	bool        Math_isAlmostEqual( double a, double b );
+EXPORT	bool        Math_isBetween( long aNumber, long lower, long upper );
+EXPORT	double      Math_floor( double aValue );
+EXPORT	long        Math_max( long a, long b );
+EXPORT	long        Math_min( long a, long b );
+EXPORT	double      Math_pi(void);
+EXPORT	long        Math_sizeOfRange( double first, double last, double increment );
+EXPORT	double      Math_squareroot( double aValue );
+EXPORT	double      Math_toPower( double base, double power );
+EXPORT	long double Math_toPower_long_double( long double base, long double power );
+EXPORT	float       Math_toPower_float( float base, float power );
+~
+!
+
+~html~
+<table>
+<thead>
+<tr>
+	<th>Returns</th><th>Method-name</th><th colspan='3'>Parameters</th>
+</tr>
+</thead>
+<tbody>
+
+<tr><td><b>long</b>       </td><td><a href='#Math_constrainBetween'>Math_contrainBetween</a>       </td><td><b>long</b> aNumber    </td><td><b>long</b> lower </td><td><b>long</b> upper      </td></tr>
+<tr><td><b>bool</b>       </td><td><a href='#Math_isAlmostEqual'>Math_isAlmostEqual</a>            </td><td><b>double</b> a        </td><td><b>double</b> b   </td>                                </tr>
+<tr><td><b>bool</b>       </td><td><a href='#Math_isBetween'>Math_isBetween</a>                    </td><td><b>long</b> aNumber    </td><td><b>long</b> lower </td><td><b>long</b> upper      </td></tr>
+<tr><td><b>double</b>     </td><td><a href='#Math_floor'>Math_floor</a>                            </td><td><b>double</b> aValue   </td>                                                           </tr>
+<tr><td><b>long</b>       </td><td><a href='#Math_max'>Math_max</a>                                </td><td><b>long</b> a          </td><td><b>long</b> b     </td>                                </tr>
+<tr><td><b>long</b>       </td><td><a href='#Math_min'>Math_min</a>                                </td><td><b>long</b> a          </td><td><b>long</b> b     </td>                                </tr>
+<tr><td><b>double</b>     </td><td><a href='#Math_pi'>Math_pi</a>                                  </td>                                                                                           </tr>
+<tr><td><b>long</b>       </td><td><a href='#Math_sizeOfRange'>Math_sizeOfRange</a>                </td><td><b>double</b> first    </td><td><b>double</b> last</td><td><b>double</b> increment</td></tr>
+<tr><td><b>double</b>     </td><td><a href='#Math_squareroot'>Math_squareroot</a>                  </td><td><b>double</b> aValue   </td>                                                           </tr>
+<tr><td><b>double</b>     </td><td><a href='#Math_toPower'>Math_toPower</a>                        </td><td><b>double</b> base     </td><td><b>double</b> power</td>                               </tr>
+<tr><td><b>long double</b></td><td><a href='#Math_toPower_long_double'>Math_toPower_long_double</a></td><td><b>long double</b> base</td><td><b>long double</b> power</td>                          </tr>
+<tr><td><b>float</b>      </td><td><a href='#Math_toPower_float'>Math_toPower_float</a>            </td><td><b>float</b> base      </td><td><b>float</b> power</td>                                </tr>
+
+</tbody>
+</table>
+~
+
+..			Dependencies
+
+~!source/c/Math.c~
+#include "openxds.core.base/Math.h"
+#include <math.h>
+~
+
+..			Functions
+
+
+~html~
+<a name='Math_constrainBetween'></a>
+<hr>
+~
+
+....			constrain Between
+
+~
+EXPORT	long Math_constrainBetween( long aNumber, long lower, long upper );
+~
+
+Parameters
+|
+/aNumber/, that should be constrained between the bounds /lower/ and /upper/;
+
+/lower/, the /lower/ bound;
+
+/upper/, the /upper/ bound;
+|
+
+Returns
+|
+/aNumber/ if it lies between /lower/ and /upper/; otherwise returns either /lower/ if less than /lower/, or /upper/ if greater than /upper/.
+|
+
+Implementation
+
+~source/c/Math.c~
+long
+Math_constrainBetween( long aNumber, long lower, long upper )
+{
+	if ( aNumber < lower )
+	{
+		aNumber = lower;
+	}
+	else if ( upper < aNumber )
+	{
+		aNumber = upper;
+	}
+	return aNumber;
+}
+~
+
+
+~html~
+<a name='Math_isAlmostEqual'></a>
+<hr>
+~
+
+....			is Almost Equal
+
+~
+EXPORT	bool Math_isAlmostEqual( double a, double b );
+~
+
+Parameters
+|
+/a/;
+
+/b/;
+|
+
+Returns
+|
+TRUE if |/a/ - /b/| < 0.1
+|
+
+Implementation
+
+~source/c/Math.c~
+bool
+Math_isAlmostEqual( double a, double b )
+{
+	return ( (a == b) || (0.00001 > fabs( a - b )) );
+}
+~
+
+
+~html~
+<a name='Math_isBetween'></a>
+<hr>
+~
+
+....			is Between
+
+~
+EXPORT	bool Math_isBetween( long aNumber, long lower, long upper );
+~
+
+Parameters
+|
+/aNumber/;
+
+/lower/;
+
+/upper/;
+|
+
+Returns
+|
+TRUE if /lower/ < /aNumber/ < /upper/; otherwise FALSE.
+|
+
+Implementation
+
+~source/c/Math.c~
+bool Math_isBetween( long aNumber, long lower, long upper )
+{
+	return ((lower < aNumber) && (aNumber < upper ));
+}
+~
+
+
+~html~
+<a name='Math_floor'></a>
+<hr>
+~
+
+....			floor
+
+~
+EXPORT	double Math_floor( double aValue );
+~
+
+Parameters
+|
+/aValue/;
+|
+
+Returns
+|
+/aValue/, rounded down to the nearest integer.
+|
+
+Implementation
+
+~source/c/Math.c~
+double
+Math_floor( double aValue )
+{
+	int anInteger = (int) aValue;
+	double aDouble = (double) anInteger;
+	if ( aDouble > aValue )
+	{
+		anInteger -= 1;
+		aDouble = (double) anInteger;
+	}
+	return aDouble;
+}
+~
+
+
+~html~
+<a name='Math_max'></a>
+<hr>
+~
+
+....			max
+
+~
+EXPORT	long Math_max( long a, long b );
+~
+
+Parameters
+|
+/a/;
+
+/b/;
+|
+
+Returns
+|
+/a/, if /a/ > /b/; otherwise /b/.
+|
+
+Implementation
+
+~source/c/Math.c~
+long
+Math_max( long a, long b )
+{
+	return (a > b) ? a : b;
+}
+~
+
+
+~html~
+<a name='Math_min'></a>
+<hr>
+~
+
+....			min
+
+~
+EXPORT	long Math_min( long a, long b );
+~
+
+Parameters
+|
+/a/;
+
+/b/;
+|
+
+Returns
+|
+/a/, if /a/ < /b/; otherwise /b/;
+|
+
+Implementation
+
+~source/c/Math.c~
+long
+Math_min( long a, long b )
+{
+	return (a < b) ? a : b;
+}
+~
+
+
+~html~
+<a name='Math_pi'></a>
+<hr>
+~
+
+....			pi
+
+~
+EXPORT	double Math_pi(void);
+~
+
+Returns
+|
+The value of *pi* to 8 decimal places.
+|
+
+Implementation
+
+~source/c/Math.c~
+double
+Math_pi()
+{
+	return 3.14159265;
+}
+~
+
+
+~html~
+<a name='Math_sizeOfRange'></a>
+<hr>
+~
+
+....			size Of Range
+
+~
+EXPORT	long Math_sizeOfRange( double first, double last, double increment );
+~
+
+Parameters
+|
+/first/;
+
+/last/;
+
+/increment/;
+|
+
+Returns
+|
+The number of times that /first/ can be incremented by /increment/ before reaching /last/.
+|
+
+Implementation
+
+~source/c/Math.c~
+long
+Math_sizeOfRange( double first, double last, double increment )
+{
+	int size = 0;
+	double i;
+
+	if ( Math_isAlmostEqual( first, last ) )
+	{
+		size++;
+	}
+	else
+	{
+		for ( i=first; i < last; i += increment )
+		{
+			size++;
+		}
+		if ( Math_isAlmostEqual( i, last ) )
+		{
+			size++;
+		}
+	}
+	return size;
+}
+~
+
+
+~html~
+<a name='Math_squareroot'></a>
+<hr>
+~
+
+....			squareroot
+
+~
+EXPORT	double Math_squareroot( double aValue );
+~
+
+Parameters
+|
+/aValue/;
+|
+
+Returns
+|
+The square root of /aValue/.
+|
+
+Implementation
+
+~source/c/Math.c~
+double
+Math_squareroot( double aValue )
+{
+	return sqrt( aValue );
+}
+~
+
+
+~html~
+<a name='Math_toPower'></a>
+<hr>
+~
+
+....			to Power (double)
+
+~
+EXPORT	double Math_toPower( double base, double power );
+~
+
+Returns
+|
+/base/ raised to /power/.
+|
+
+Implementation
+
+~source/c/Math.c~
+double
+Math_toPower( double base, double power )
+{
+	return pow( base, power );
+}
+~
+
+
+~html~
+<a name='Math_toPower_long_double'></a>
+<hr>
+~
+
+....			to Power (long double)
+
+~
+EXPORT	long double Math_toPower_long_double( long double base, long double power );
+~
+
+Returns
+|
+Returns /base/ raised to /power/.
+|
+
+~source/c/Math.c~
+long double
+Math_toPower_long_double( long double base, long double power )
+{
+	return powl( base, power );
+}
+~
+
+
+~html~
+<a name='Math_toPower_float'></a>
+<hr>
+~
+
+....			to Power (float)
+
+~
+EXPORT	float Math_toPower_float( float base, float power );
+~
+
+Returns
+|
+/base/ raised to /power/.
+|
+
+~source/c/Math.c~
+float
+Math_toPower_float( float base, float power )
+{
+	return powf( base, power );
+}
+~
+
+!
+~include/openxds.core.base/Math.h~
+#endif
+~
+!
