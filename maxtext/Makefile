@@ -1,4 +1,5 @@
 BUILD=libexec/Build/build/bin/build9
+CFLAGS="-std=c++98 -Wno-deprecated"
 
 default:
 	@echo "make all # to build maxtext"
@@ -6,10 +7,10 @@ default:
 all: maxtext
 
 maxtext: $(BUILD)
-	BUILD_PATH=../Dependencies CFLAGS=-std=c++98 $(BUILD) --force --all
+	BUILD_PATH=../Dependencies CFLAGS=$(CFLAGS) $(BUILD) --force --all
 
 quick: $(BUILD)
-	BUILD_PATH=../Dependencies CFLAGS=-std=c++98 $(BUILD)
+	BUILD_PATH=../Dependencies CFLAGS=$(CFLAGS) $(BUILD)
 
 #
 #	libexec dependencies
