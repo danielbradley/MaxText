@@ -1,6 +1,7 @@
 #include "maxtext/Page.h"
 
 #include "maxtext/Blockquote.h"
+#include "maxtext/Code.h"
 #include "maxtext/Heading.h"
 #include "maxtext/Line.h"
 #include "maxtext/List.h"
@@ -154,25 +155,49 @@ throw (IOException*)
 				}
 				else if ( line->startsWith( '~' ) )
 				{
-					const char* _line = line->getText().getChars();
 					this->add( block );
-					block = new Preformatted( *line );
-					delete line;
 
-					bool loop = true;
-					while ( loop && !parser.hasFinished() )
+					bool isCode = (1 < line->getText().getLength());
+					if ( isCode )
 					{
-						line = new Line( parser.readLine() );
-						const char* _line = line->getText().getChars();
-						if ( line->startsWith( '~' ) )
+						//	Need to create a new startcode object
+						this->add( new Code( Code::START ) );
+					}
+					{
+						block = new Preformatted( *line ); delete line;
+
+						bool loop = true;
+						while ( loop && !parser.hasFinished() )
 						{
-							delete line;
-							loop = false;
-						} else {
-							block->add( line );
+							Line* pre = new Line( parser.readLine() );
+							const String& text = pre->getText();
+
+							if ( pre->startsWith( '~' ) && (1 < text.getLength()) )
+							{
+								this->add( block );
+								block = new Preformatted( *pre );
+								delete pre;
+							}
+							else
+							if ( pre->startsWith( '~' ) )
+							{
+								delete pre;
+								loop = false;
+							}
+							else
+							{
+								block->add( pre );
+							}
 						}
 					}
 					this->add( block );
+
+					if ( isCode )
+					{
+						//	Need to create a new end code object
+						this->add( new Code( Code::END ) );
+					}
+
 					block = new Paragraph();
 				}
 				else if ( line->startsWith( '@' ) )

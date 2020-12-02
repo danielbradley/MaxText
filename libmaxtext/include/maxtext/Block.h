@@ -22,6 +22,7 @@ public:
 	static const int TITLE        = 9;
 	static const int BLOCKQUOTE   = 10;
 	static const int MARGINNOTE   = 11;
+	static const int CODE         = 12;
 
 	         Block( int aType );
 	virtual ~Block();
