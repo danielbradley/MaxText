@@ -6,10 +6,10 @@ default:
 all: maxtext
 
 maxtext: $(BUILD)
-	BUILD_PATH=../Dependencies $(BUILD) --force --all
+	BUILD_PATH=../Dependencies CFLAGS=-std=c++98 $(BUILD) --force --all
 
 quick: $(BUILD)
-	BUILD_PATH=../Dependencies $(BUILD)
+	BUILD_PATH=../Dependencies CFLAGS=-std=c++98 $(BUILD)
 
 #
 #	libexec dependencies
