@@ -15,7 +15,7 @@ maxtext-Linux: $(BUILD)
 	OSTYPE=linux-gnu BUILD_PATH=../Dependencies CXXFLAGS=$(CXXFLAGS) $(BUILD) --force --all
 
 copy:
-	mkdir -p bin/$(OSNAME)-$CPU
+	mkdir -p bin/$(OSNAME)-$(CPU)
 	cp bin/maxtext bin/$(OSNAME)-$(CPU)/maxtext 
 	cp bin/maxtext bin/$(OSNAME)-$(CPU)/max2html
  
