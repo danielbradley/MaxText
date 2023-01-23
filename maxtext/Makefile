@@ -1,11 +1,12 @@
-BUILD=libexec/Build/build/bin/build9
-CXXFLAGS="-std=c++98 -Wno-deprecated"
-OSNAME=$(shell uname)
+BUILD    := libexec/Build/build/bin/build9
+CXXFLAGS := "-std=c++98 -Wno-deprecated"
+OSNAME   := $(shell uname)
+CPU      := $(shell uname -m)
 
 default:
 	@echo "make all # to build maxtext"
 
-all: maxtext-$(OSNAME) symlink
+all: maxtext-$(OSNAME) copy
 
 maxtext-Darwin: $(BUILD)
 	BUILD_PATH=../Dependencies CXXFLAGS=$(CXXFLAGS) $(BUILD) --force --all
@@ -13,13 +14,13 @@ maxtext-Darwin: $(BUILD)
 maxtext-Linux: $(BUILD)
 	OSTYPE=linux-gnu BUILD_PATH=../Dependencies CXXFLAGS=$(CXXFLAGS) $(BUILD) --force --all
 
-symlink:
-	mkdir -p bin/$(OSNAME)
-	ln -sf ../../bin/maxtext bin/$(OSNAME)/maxtext
-	ln -sf ../../bin/maxtext bin/$(OSNAME)/max2html
-
-#
-#	libexec dependencies
+copy:
+	mkdir -p bin/$(OSNAME)-$CPU
+	cp bin/maxtext bin/$(OSNAME)-$(CPU)/maxtext 
+	cp bin/maxtext bin/$(OSNAME)-$(CPU)/max2html
+ 
+#       
+#       libexec dependencies
 #
 
 $(BUILD):
