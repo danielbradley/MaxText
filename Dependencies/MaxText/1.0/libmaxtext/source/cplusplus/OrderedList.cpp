@@ -91,7 +91,7 @@ OrderedList::print( PrintWriter& p ) const
 void
 OrderedList::printTex( PrintWriter& p ) const
 {
-	p.printf( "\\begin{enumerate}\n" );
+	p.printf( "\\begin{enumerate}\n\\itemsep-0.5em\n" );
 	IPIterator<ListItem>* it = this->lines->positions();
 	while ( it->hasNext() )
 	{
