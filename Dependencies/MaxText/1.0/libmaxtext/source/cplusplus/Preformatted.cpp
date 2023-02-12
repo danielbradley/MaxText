@@ -89,9 +89,9 @@ Preformatted::printTex( PrintWriter& p ) const
 		p.printf( "%s\n", this->textbuffer->getChars() );
 		break;
 	default:
-		p.printf( "\\begin{verbatimtab}\n" );
+		p.printf( "\\begin{lstlisting}\n" );
 		p.printf( "%s\n", this->textbuffer->getChars() );
-		p.printf( "\\end{verbatimtab}\n" );
+		p.printf( "\\end{lstlisting}\n" );
 	}
 }
 
