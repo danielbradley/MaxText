@@ -13,7 +13,9 @@ private:
 	enum type {
 		normal,
 		html,
-		latex
+		latex,
+		pattern,
+		file
 	};
 	type blockType;
 
