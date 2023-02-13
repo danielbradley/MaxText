@@ -36,6 +36,18 @@ Preformatted::Preformatted( const Line& line ) : Block( Block::PREFORMATTED )
 				{
 					this->blockType = latex;
 				}
+				else if ( token->contains( "." ) )
+				{
+					this->blockType = file;
+				}
+				else if ( token->getLength() == 0 )
+				{
+					this->blockType = normal;
+				}
+				else
+				{
+					this->blockType = pattern;
+				}
 			}
 			delete token;
 		}
@@ -88,10 +100,17 @@ Preformatted::printTex( PrintWriter& p ) const
 	case latex:
 		p.printf( "%s\n", this->textbuffer->getChars() );
 		break;
-	default:
+	case pattern:
+	case file:
 		p.printf( "\\begin{lstlisting}\n" );
 		p.printf( "%s\n", this->textbuffer->getChars() );
 		p.printf( "\\end{lstlisting}\n" );
+		break;
+	case normal:
+	default:
+		p.printf( "\\begin{verbatimtab}\n" );
+		p.printf( "%s\n", this->textbuffer->getChars() );
+		p.printf( "\\end{verbatimtab}\n" );
 	}
 }
 
