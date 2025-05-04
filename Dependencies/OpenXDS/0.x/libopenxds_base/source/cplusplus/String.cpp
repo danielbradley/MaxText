@@ -77,7 +77,7 @@ String::String( const String& aString ) : Object()
 String::String( int number ) : Object()
 {
 	char *value = new char[ 128 ];
-	sprintf( value, "%i", number);
+	snprintf( value, 128, "%i", number);
 	
 	this->_data = new_StdString( value );
 	
@@ -103,7 +103,7 @@ String* String::asString() const
 
 bool String::equals( const Object& obj ) const
 {
-    const Object* tmp = &obj;
+	const Object* tmp = &obj;
 
 	const String* cast = dynamic_cast<const String*>( tmp );
 	if ( null == cast )
@@ -112,7 +112,7 @@ bool String::equals( const Object& obj ) const
 	} else {
 		return ( 0 == this->compareTo( *cast ) );
 	}
-} 
+}
 
 /*
  *	Deprecated
